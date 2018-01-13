@@ -17,30 +17,34 @@ $( document ).ready(function() {
       url: queryURL,
       method: "GET"
     }).done(function(response){
+      var results = response.data;
+        console.log("ready");
+        
+      for (var i=0; i < results.length; i++){
 
-      //Create div to hold movie
-      var gifDiv = $("<div class='gif'>");
+        //Create div to hold movie
+        var gifDiv = $("<div class='gif'>");
 
-      //Store rating
-      var rating = response.data.rating;
-      console.log(rating);
+        //Store rating
+        var rating = results[i].rating;
+        console.log(rating);
 
-      //P element to display rating
-      var ratingP = $("<p>").text("Rating: " + rating);
+        //P element to display rating
+        var ratingP = $("<p>").text("Rating: " + rating);
 
-      //Get URL of gif
-      var gifURL = response.data.images.fixed_height_still.url;
-      console.log(gifURL);
+        //Get URL of gif
+        var gifURL = results[i].images.fixed_height_still;
+        console.log(gifURL);
 
-      //Create image element to hold gif
-      var sportGif = $("<img>").attr("src", gifURL);
+        //Create image element to hold gif
+        var sportGif = $("<img>").attr("src", gifURL);
 
-      //Append the gif
-      gifDiv.append(sportGif);
+        //Append the gif
+        gifDiv.append(sportGif);
 
-      //
-      $("#gifsView").html(gifDiv);
-      
+        //
+        $("#gifsView").html(gifDiv);
+      }
     })
   });
 
