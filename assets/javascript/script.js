@@ -19,7 +19,7 @@ $( document ).ready(function() {
     }).done(function(response){
       var results = response.data;
         console.log("ready");
-        
+
       for (var i=0; i < results.length; i++){
 
         //Create div to hold movie
@@ -33,7 +33,7 @@ $( document ).ready(function() {
         var ratingP = $("<p>").text("Rating: " + rating);
 
         //Get URL of gif
-        var gifURL = results[i].images.fixed_height_still;
+        var gifURL = results[i].images.fixed_height_still.url;
         console.log(gifURL);
 
         //Create image element to hold gif
@@ -41,12 +41,25 @@ $( document ).ready(function() {
 
         //Append the gif
         gifDiv.append(sportGif);
+        gifDiv.prepend(ratingP);
 
         //
-        $("#gifsView").html(gifDiv);
+        $("#gifsView").append(gifDiv);
       }
     })
-  });
+
+/*  $("#add-sport").on("click", function(event){
+    event.preventDefault();
+
+    var sport = $("#sport-input").val().trim();
+
+    topics.push(sport);
+
+    renderButtons();
+
+  });*/
+
+});
 
 
   //===============Functions=================
