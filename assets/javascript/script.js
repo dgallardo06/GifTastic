@@ -6,13 +6,17 @@ $( document ).ready(function() {
   renderButtons();
   showGifs();
 
+  // on click of submit
   $("#add-sport").on("click", function(event){
     event.preventDefault();
 
+    //get the user input
     var sport = $("#sport-input").val().trim();
 
+    //add to array
     topics.push(sport);
 
+    //create button and show gifs when clicked
     renderButtons();
     showGifs();
   });
@@ -20,8 +24,10 @@ $( document ).ready(function() {
 
   //===============Functions=================
       function renderButtons(){
+        //remove any existing buttons to prevent repitition
         $("#buttonsNav").empty();
 
+        //for each string in array, create a button
         for (var i = 0; i < topics.length; i++){
           var newButton = $("<button>");
 
@@ -49,7 +55,7 @@ $( document ).ready(function() {
 
         for (var i=0; i < results.length; i++){
 
-          //Create div to hold movie
+          //Create div to hold gif
           var gifDiv = $("<div class='gif'>");
 
           //Store rating
@@ -58,17 +64,21 @@ $( document ).ready(function() {
           //P element to display rating
           var ratingP = $("<p>").text("Rating: " + rating);
 
-          //Get URL of gif
-          var gifURL = results[i].images.fixed_height_still.url;
+          //Get still image of gif
+          var gifStill = results[i].images.fixed_height_small_still.url;
+
+          //Get gif url
+          var gifURL = results[i].images.fixed_height_small.url;
 
           //Create image element to hold gif
-          var sportGif = $("<img>").attr("src", gifURL);
+          var sportGif = $("<img>").attr("src", gifStill);
 
           //Append the gif
           gifDiv.append(sportGif);
-          gifDiv.prepend(ratingP);
+          gifDiv.append(ratingP);
 
           $("#gifsView").prepend(gifDiv);
+
         }
       })
     });
